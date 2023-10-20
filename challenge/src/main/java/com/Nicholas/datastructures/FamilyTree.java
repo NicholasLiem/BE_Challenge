@@ -14,10 +14,6 @@ public class FamilyTree {
         return person;
     }
 
-    public void setPerson(Person person) {
-        this.person = person;
-    }
-
     /**
      * Son and Daughter Relationship
      */
@@ -32,6 +28,18 @@ public class FamilyTree {
      * Sibling Relationship
      */
     public List<Person> getSiblingsByGender(Person person, String gender) {
+        List<Person> siblings =  getAllSiblings(person);
+        return siblings.stream()
+                .filter(child -> child.getGender().equalsIgnoreCase(gender))
+                .collect(Collectors.toList());
+    }
+
+    public List<Person> getSiblings(Person person){
+        List<Person> siblings = getAllSiblings(person);;
+        return siblings;
+    }
+
+    private List<Person> getAllSiblings(Person person) {
         List<Person> siblings = new ArrayList<>();
         Person mother = person.getMother();
         if (mother != null) {
@@ -39,9 +47,7 @@ public class FamilyTree {
             siblings.addAll(children);
             siblings.remove(person);
         }
-        return siblings.stream()
-                .filter(child -> child.getGender().equalsIgnoreCase(gender))
-                .collect(Collectors.toList());
+        return siblings;
     }
 
     /**
@@ -110,6 +116,31 @@ public class FamilyTree {
     public List<Person> getPaternalUncles(Person person) {
         Person father = person.getFather();
         return (father != null) ? getBrothers(father) : new ArrayList<>();
+    }
+
+    public Person searchPersonRecursive(String name) {
+        return searchPersonRecursiveHelper(this.getPerson(), name);
+    }
+
+    private Person searchPersonRecursiveHelper(Person currentPerson, String name) {
+        if (currentPerson.getName().equalsIgnoreCase(name)) {
+            return currentPerson;
+        }
+
+        if (currentPerson.getSpouse() != null && currentPerson.getSpouse().getName().equalsIgnoreCase(name)) {
+            return currentPerson.getSpouse();
+        }
+
+        List<Person> children = currentPerson.getChildren();
+
+        for (Person child : children) {
+            Person foundPerson = searchPersonRecursiveHelper(child, name);
+            if (foundPerson != null) {
+                return foundPerson;
+            }
+        }
+
+        return null;
     }
 
     public void printFamilyTree() {

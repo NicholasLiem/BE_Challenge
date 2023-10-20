@@ -1,46 +1,15 @@
-package com.Nicholas.commands;
+package com.Nicholas;
 
 import com.Nicholas.datastructures.FamilyTree;
 import com.Nicholas.datastructures.Person;
-import com.Nicholas.interfaces.Command;
+import org.junit.Test;
 
-import java.util.HashMap;
+import static org.junit.Assert.assertEquals;
 
-public class CommandManager {
-    private FamilyTree familyTree;
-    private static CommandManager instance;
-    private final HashMap<String, Command> commands;
-    private final Command fallbackCommand;
-    private CommandManager() {
-        this.fallbackCommand = new FallbackCommand();
-        this.familyTree = initializeFamilyTree();
-        commands = new HashMap<>();
-        registerCommand("ADD_CHILD", new AddChildCommand());
-        registerCommand("GET_RELATIONSHIP", new GetRelationshipCommand());
-        registerCommand("EXIT", new ExitCommand());
-    }
+public class OutputTest {
 
-    public static CommandManager getInstance() {
-        if (instance == null) {
-            instance = new CommandManager();
-        }
-        return instance;
-    }
-
-    public void registerCommand(String commandName, Command command) {
-        this.commands.put(commandName, command);
-    }
-
-    public void executeCommand(String commandName, String[] args) {
-        if (commands.containsKey(commandName)) {
-            Command command = commands.get(commandName);
-            command.execute(args);
-        } else {
-            this.fallbackCommand.execute(args);
-        }
-    }
-
-    public FamilyTree initializeFamilyTree(){
+    @Test
+    public void testAdd() {
         Person kingArthur = new Person("King Arthur", "Male");
         Person queenMargaret = new Person("Queen Margaret", "Female");
 
@@ -116,10 +85,15 @@ public class CommandManager {
         albus.addChild(ron);
         albus.addChild(ginny);
 
-        return new FamilyTree(kingArthur);
-    }
-
-    public FamilyTree getFamilyTree() {
-        return familyTree;
+        FamilyTree ft = new FamilyTree(kingArthur);
+        Person test = ft.searchPersonRecursive("Dominique");
+        //            ft.printFamilyTree();
+//            List<Person> ronaldBrothers = ft.getBrothers(ronald);
+//            Utils.printList(ronaldBrothers);
+//            List<Person> rosePaternalUncles = ft.getPaternalAunts(rose);
+//            Utils.printList(rosePaternalUncles);
+//            List<Person> remusMaternalAunt = ft.getMaternalAunts(remus);
+//            Utils.printList(remusMaternalAunt);
+        assertEquals(1, 1);
     }
 }

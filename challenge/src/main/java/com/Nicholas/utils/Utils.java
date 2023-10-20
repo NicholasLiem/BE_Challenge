@@ -27,10 +27,11 @@ public class Utils {
     public static <T extends Person> void printList(List<T> list) {
         if (!list.isEmpty()){
             for (T item : list) {
-                System.out.println(item.getName());
+                System.out.print(item.getName() + " ");
             }
+            System.out.println();
         } else {
-            System.out.println("Empty list");
+            System.out.println("PERSON_NOT_FOUND");
         }
     }
 }

@@ -13,8 +13,7 @@ public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
-//        String filePath = getFilePath(scanner);
-        String filePath = "files/commands.txt";
+        String filePath = getFilePath(scanner);
 
         if (filePath != null) {
             processCommands(filePath);
@@ -35,8 +34,6 @@ public class Main {
             String line;
 
             while ((line = reader.readLine()) != null) {
-//              System.out.print("Enter a command (or 'exit' to quit): ");
-//              String input = scanner.nextLine();
                 String[] inputStr = Utils.sanitizeInput(line);
                 String command = inputStr[0];
                 String[] arguments = new String[inputStr.length - 1];

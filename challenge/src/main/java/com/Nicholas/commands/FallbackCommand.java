@@ -5,6 +5,6 @@ import com.Nicholas.interfaces.Command;
 public class FallbackCommand implements Command {
     @Override
     public void execute(String[] args) {
-        System.out.println("Your command is not recognized");
+        System.out.println("COMMAND_NOT_RECOGNIZED");
     }
 }
