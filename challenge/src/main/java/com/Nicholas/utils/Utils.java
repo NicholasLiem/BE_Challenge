@@ -29,9 +29,8 @@ public class Utils {
             for (T item : list) {
                 System.out.print(item.getName() + " ");
             }
-            System.out.println();
         } else {
-            System.out.println("PERSON_NOT_FOUND");
+            System.out.print("NONE");
         }
     }
 }

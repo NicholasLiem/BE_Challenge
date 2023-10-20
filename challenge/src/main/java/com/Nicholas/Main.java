@@ -12,8 +12,13 @@ public class Main {
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
+        String filePath;
 
-        String filePath = getFilePath(scanner);
+        if (args.length != 0){
+            filePath = args[0];
+        } else {
+            filePath = getFilePath(scanner);
+        }
 
         if (filePath != null) {
             processCommands(filePath);
@@ -32,14 +37,22 @@ public class Main {
             CommandManager cm = CommandManager.getInstance();
             BufferedReader reader = new BufferedReader(new FileReader(filePath));
             String line;
+            boolean isFirstLine = true;
+
 
             while ((line = reader.readLine()) != null) {
+
                 String[] inputStr = Utils.sanitizeInput(line);
                 String command = inputStr[0];
                 String[] arguments = new String[inputStr.length - 1];
                 System.arraycopy(inputStr, 1, arguments, 0, arguments.length);
-
+                if (isFirstLine) {
+                    isFirstLine = false;
+                } else {
+                    System.out.println();
+                }
                 cm.executeCommand(command, arguments);
+
             }
 
             reader.close();

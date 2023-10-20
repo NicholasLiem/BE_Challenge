@@ -17,56 +17,57 @@ public class GetRelationshipCommand implements Command {
 
 
             FamilyTree familyTree = cm.getFamilyTree();
-            Person person = familyTree.searchPersonRecursive(personName);
+            Person person = familyTree.searchPersonByName(personName);
 
             if (person != null) {
+                List<Person> relatives = null;
+
                 switch (relationship.toLowerCase()) {
                     case "son":
-                        List<Person> sons = familyTree.getChildrenByGender(person, "Male");
-                        Utils.printList(sons);
+                        relatives = familyTree.getChildrenByGender(person, "Male");
                         break;
                     case "daughter":
-                        List<Person> daughters = familyTree.getChildrenByGender(person, "Female");
-                        Utils.printList(daughters);
+                        relatives = familyTree.getChildrenByGender(person, "Female");
                         break;
                     case "siblings":
-                        List<Person> siblings = familyTree.getSiblings(person);
-                        Utils.printList(siblings);
+                        relatives = familyTree.getSiblings(person);
                         break;
                     case "brother-in-law":
-                        List<Person> bil = familyTree.getBrotherInLaws(person);
-                        Utils.printList(bil);
+                        relatives = familyTree.getBrotherInLaws(person);
                         break;
                     case "sister-in-law":
-                        List<Person> sil = familyTree.getSisterInLaws(person);
-                        Utils.printList(sil);
+                        relatives = familyTree.getSisterInLaws(person);
                         break;
                     case "maternal-aunt":
-                        List<Person> maternalAunt = familyTree.getMaternalAunts(person);
-                        Utils.printList(maternalAunt);
+                        relatives = familyTree.getMaternalAunts(person);
                         break;
                     case "paternal-aunt":
-                        List<Person> paternalAunt = familyTree.getPaternalAunts(person);
-                        Utils.printList(paternalAunt);
+                        relatives = familyTree.getPaternalAunts(person);
                         break;
                     case "maternal-uncle":
-                        List<Person> maternalUncle = familyTree.getMaternalUncles(person);
-                        Utils.printList(maternalUncle);
+                        relatives = familyTree.getMaternalUncles(person);
                         break;
                     case "paternal-uncle":
-                        List<Person> paternalUncle = familyTree.getPaternalUncles(person);
-                        Utils.printList(paternalUncle);
+                        relatives = familyTree.getPaternalUncles(person);
                         break;
                     default:
-                        System.out.println("INVALID_RELATIONSHIP_TYPE");
+                        System.out.print("INVALID_RELATIONSHIP_TYPE");
                         break;
                 }
+
+                if (relatives != null) {
+                    if (relatives.isEmpty()) {
+                        System.out.print("NONE");
+                    } else {
+                        Utils.printList(relatives);
+                    }
+                }
             } else {
-                System.out.println("PERSON_NOT_FOUND");
+                System.out.print("PERSON_NOT_FOUND");
             }
 
         } else {
-            System.out.println("GET_RELATIONSHIP_ARGS_NOT_ACCEPTED");
+            System.out.print("GET_RELATIONSHIP_ARGS_NOT_ACCEPTED");
         }
     }
 }

@@ -89,32 +89,32 @@ public class CommandManager {
         james.marry(darcy);
         albus.marry(alice);
 
-        kingArthur.addChild(bill);
-        kingArthur.addChild(charlie);
-        kingArthur.addChild(percy);
-        kingArthur.addChild(ronald);
-        kingArthur.addChild(ginerva);
+        kingArthur.getSpouse().addChild(bill);
+        kingArthur.getSpouse().addChild(charlie);
+        kingArthur.getSpouse().addChild(percy);
+        kingArthur.getSpouse().addChild(ronald);
+        kingArthur.getSpouse().addChild(ginerva);
 
-        bill.addChild(victoire);
-        bill.addChild(dominique);
-        bill.addChild(louis);
-        percy.addChild(molly);
-        percy.addChild(lucy);
+        bill.getSpouse().addChild(victoire);
+        bill.getSpouse().addChild(dominique);
+        bill.getSpouse().addChild(louis);
+        percy.getSpouse().addChild(molly);
+        percy.getSpouse().addChild(lucy);
 
-        ronald.addChild(rose);
-        ronald.addChild(hugo);
+        ronald.getSpouse().addChild(rose);
+        ronald.getSpouse().addChild(hugo);
 
         ginerva.addChild(james);
         ginerva.addChild(albus);
         ginerva.addChild(lily);
 
         victoire.addChild(remus);
-        malfoy.addChild(draco);
-        malfoy.addChild(aster);
+        malfoy.getSpouse().addChild(draco);
+        malfoy.getSpouse().addChild(aster);
 
-        james.addChild(william);
-        albus.addChild(ron);
-        albus.addChild(ginny);
+        james.getSpouse().addChild(william);
+        albus.getSpouse().addChild(ron);
+        albus.getSpouse().addChild(ginny);
 
         return new FamilyTree(kingArthur);
     }

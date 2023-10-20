@@ -70,10 +70,35 @@ public class FamilyTree {
     public List<Person> getBrotherInLaws(Person person) {
         List<Person> brotherInLaws = new ArrayList<>();
         if (person.getSpouse() != null) {
-            brotherInLaws.addAll(getBrothers(person));
+            List<Person> siblings = getSiblings(person.getSpouse());
+            for (Person sibling : siblings) {
+
+                if (sibling.getGender().equalsIgnoreCase("Male"))
+                {
+                    brotherInLaws.add(sibling);
+                }
+
+                if (sibling.getSpouse() != null && sibling.getSpouse().getGender().equalsIgnoreCase("Male")) {
+                    brotherInLaws.add(sibling.getSpouse());
+                }
+            }
+        } else {
+            List<Person> siblings = getSiblings(person);
+            for (Person sibling : siblings) {
+
+                if (sibling.getGender().equalsIgnoreCase("Male"))
+                {
+                    brotherInLaws.add(sibling);
+                }
+
+                if (sibling.getSpouse() != null && sibling.getSpouse().getGender().equalsIgnoreCase("Male")) {
+                    brotherInLaws.add(sibling.getSpouse());
+                }
+            }
         }
         return brotherInLaws;
     }
+
 
     /**
      * Sister-In-Law Relationship
@@ -81,10 +106,31 @@ public class FamilyTree {
     public List<Person> getSisterInLaws(Person person) {
         List<Person> sisterInLaws = new ArrayList<>();
         if (person.getSpouse() != null) {
-            sisterInLaws.addAll(getSisters(person));
+            List<Person> siblings = getSiblings(person.getSpouse());
+            for (Person sibling : siblings) {
+                if (sibling.getGender().equalsIgnoreCase("Female"))
+                {
+                    sisterInLaws.add(sibling);
+                }
+                if (sibling.getSpouse() != null && sibling.getSpouse().getGender().equalsIgnoreCase("Female")) {
+                    sisterInLaws.add(sibling.getSpouse());
+                }
+            }
+        } else {
+            List<Person> siblings = getSiblings(person);
+            for (Person sibling: siblings) {
+                if (sibling.getGender().equalsIgnoreCase("Female"))
+                {
+                    sisterInLaws.add(sibling);
+                }
+                if (sibling.getSpouse() != null && sibling.getSpouse().getGender().equalsIgnoreCase("Female")) {
+                    sisterInLaws.add(sibling.getSpouse());
+                }
+            }
         }
         return sisterInLaws;
     }
+
 
     /**
      * Maternal-Aunt Relationship
@@ -118,11 +164,11 @@ public class FamilyTree {
         return (father != null) ? getBrothers(father) : new ArrayList<>();
     }
 
-    public Person searchPersonRecursive(String name) {
-        return searchPersonRecursiveHelper(this.getPerson(), name);
+    public Person searchPersonByName(String name) {
+        return searchPersonRecursive(this.getPerson(), name);
     }
 
-    private Person searchPersonRecursiveHelper(Person currentPerson, String name) {
+    private Person searchPersonRecursive(Person currentPerson, String name) {
         if (currentPerson.getName().equalsIgnoreCase(name)) {
             return currentPerson;
         }
@@ -134,7 +180,7 @@ public class FamilyTree {
         List<Person> children = currentPerson.getChildren();
 
         for (Person child : children) {
-            Person foundPerson = searchPersonRecursiveHelper(child, name);
+            Person foundPerson = searchPersonRecursive(child, name);
             if (foundPerson != null) {
                 return foundPerson;
             }

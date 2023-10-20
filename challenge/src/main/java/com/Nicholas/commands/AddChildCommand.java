@@ -12,24 +12,26 @@ public class AddChildCommand implements Command {
             String childName = args[1];
             String childGender = args[2];
 
-            Person parent = cm.getFamilyTree().searchPersonRecursive(parentName);
+            Person parent = cm.getFamilyTree().searchPersonByName(parentName);
 
-            Person newChildExist = cm.getFamilyTree().searchPersonRecursive(childName);
+            Person newChildExist = cm.getFamilyTree().searchPersonByName(childName);
             if (newChildExist != null){
-                System.out.println("PERSON_ALREADY_IN_FAMILY");
+                System.out.print("PERSON_ALREADY_IN_FAMILY");
                 return;
             }
 
             if (parent == null) {
-                System.out.println("PERSON_NOT_FOUND");
+                System.out.print("PERSON_NOT_FOUND");
 
             } else {
                 Person child = new Person(childName, childGender);
-                parent.addChild(child);
-                System.out.println("CHILD_ADDED");
+                boolean success = parent.addChild(child);
+                if (success) {
+                    System.out.print("CHILD_ADDED");
+                }
             }
         } else {
-            System.out.println("ADD_CHILD_ARGS_NOT_ACCEPTED");
+            System.out.print("ADD_CHILD_ARGS_NOT_ACCEPTED");
         }
     }
 }

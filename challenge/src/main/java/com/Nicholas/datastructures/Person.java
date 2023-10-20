@@ -41,19 +41,25 @@ public class Person {
         this.children = children;
     }
 
-    public void addChild(Person child) {
-        this.children.add(child);
-        if (spouse != null) {
-            spouse.children.add(child);
+    public boolean addChild(Person child) {
+        if (this.gender.equalsIgnoreCase("Male")){
+            System.out.println("CHILD_ADDITION_FAILED");
+        } else {
+            this.children.add(child);
+            if (spouse != null) {
+                spouse.children.add(child);
 
-            if (spouse.gender.equalsIgnoreCase("Female")) {
-                child.setMother(spouse);
-                child.setFather(this);
-            } else if (spouse.gender.equalsIgnoreCase("Male")) {
-                child.setFather(spouse);
-                child.setMother(this);
+                if (spouse.gender.equalsIgnoreCase("Female")) {
+                    child.setMother(spouse);
+                    child.setFather(this);
+                } else if (spouse.gender.equalsIgnoreCase("Male")) {
+                    child.setFather(spouse);
+                    child.setMother(this);
+                }
             }
+            return true;
         }
+        return false;
     }
 
 
