@@ -1,75 +1,59 @@
 # SOFTWARE ENGINEER TAKE HOME TEST - BACKEND
 
-Congratulations, we would like to invite you to complete our Backend Software Engineer coding challenge!
+## Description
+The task at hand is to create a Command Line Interface (CLI) program using Java, a language that is well-regarded for Object Oriented Programming. What's particularly exiciting is the application of design patterns such as Singleton pattern which can help unsure that a single instance (in this case CommandManager) of a class is created, and the Strategy pattern which allows me to implement different commands as strategies, each adhearing to a common interface but with unique inner implementations.
 
-This may take 3-8 hours depends on your assumption and we give candidates 3 days to complete it and send it back.
-
-We would like to thank our friends at Geektrust for allowing us to use this challenge.
-
-1. Getting the right output is important, but more important is clean code and how well designed your code is. We use Geektrust for our tests so you should absolutely take a look at their [help page](https://www.geektrust.in/blog/2018/01/24/get-started-geektrust-coding-challenge/) on what we look for in your code, and how to get started with the coding challenge.
-
-2. Please add a readme with assumptions you’ve made and how to test and run your code too.
-
-3. We expect a command line app. So no web apps will be considered for evaluation. We don’t need data stores either.
-
-4. Usage of non essential 3rd party libraries will affect your evaluation.
-
-5. We will download your solution which will be seen by some of Shippit’s Software Engineers so please ensure the solution works on any system without any code changes/manual setup.
-
-![The Arthur Family Tree](assets/family_tree.png)
-
-
-Our problem is set on the planet of Lengaburu, the
-distant galaxy of Tara B. Our protagonists are King
-Arthur, Queen Margaret and their family.
-
-
-<p align="center">
-  <img src="assets/king.png" width="300px"/>
-</p>
-
-King Arthur is the emperor of Lengaburu and has been
-ruling the planet for the last 350 years (they have long lives in Lengaburu!).
-
-Let’s write some code to get to know the family.
-
-The coding problem is for backend and fullstack
-engineers and test object oriented fundamentals.
-
-
-## MEET THE FAMILY
-
-Write code to model out the King Arthur family tree so that:
-
+## Assumptions
+* Taken from the ReadMe before
 * Given a ‘name’ and a ‘relationship’, you should output the people corresponding to the relationship
 in the order in which they are added to the family tree
 * You should be able to add a child to any family in the tree through the mother
-
-Simple right? Remember, our evaluation is based not only on getting the right output, but on how you
-have written your code.
-
-## SAMPLE INPUT/OUTPUT
-Input needs to be read from a text file. and output should be printed to console. **Your program
+* Input needs to be read from a text file. and output should be printed to console. **Your program
 should take the location to the test file as a parameter**.
 
-![Input Output](assets/input_output.png)
+## Depedencies
+* [Java Development Kit (JDK) v19.0.2](https://www.oracle.com/id/java/technologies/downloads/) for compiling java files
+* [Apache Maven v3.8.7](https://maven.apache.org/) for build and test automation for development process
+* [JUnit 4 (Included in Apache Maven Dependency)](https://github.com/junit-team/junit4/wiki/Download-and-Install) for unit testing and logical testing
 
-More sample output scenarios.
+## How to Test the Program
+1. Make sure you have Apache Maven v3.8.7 installed
+2. Change your directory to 'challenge' directory
+  ```sh
+  cd challenge
+  ```
+2. Run test script via Maven
+  ```sh
+  mvn test
+  ```
+3. Look at the error logs if there is any
+4. Look at the surefire reports for more information about the unit test
+```sh
+cd target/surefire-reports
+```
+5. Console / Terminal Line should look like this <br>
+![Test Folder](/assets/Screenshot_8.png)
 
-**You need to stick to the Sample input output format as shown**. This is very important as we
-were automating the correctness of the solution to give you a faster evaluation.
-
-![Sample Output](assets/sample_output.png)
-
-## RELATIONSHIPS TO HANDLE
-
-There are many relationships that could exist but at a minimum, your code needs to handle these
-relationships.
-
-![Relationships](assets/relationships.png)
-
-## CHECKLIST - SUBMITTING CODE
-1. Please open a Pull Request against this repository.
-2. Replace this README with pertinent information.
-3. Please include only source files and do not include any libraries or executables or
-node_modules folder.
+## How to Run the Program
+1. Make sure you are in the 'challenge' directory
+2. Build the project via Maven
+  ```sh
+  mvn clean package
+  ```
+3. Look at the 'target' folder and make sure the build is successful, there should be 'challenge-1.0.jar' file.
+4. Target folder should look like this <br>
+![Target Folder](/assets/Screenshot_7.png)
+5. I have prepared some script to build and run, but if you want to do it manually you can run the program this way
+```sh
+java -cp target/challenge-1.0.jar com.Nicholas.Main <file_name.txt>
+```
+6. [Alternatives] (Without file name as argument, you can still input them in console)
+```sh
+java -cp target/challenge-1.0.jar com.Nicholas.Main
+```
+7. [Example] Usage
+```sh
+java -cp target/challenge-1.0.jar com.Nicholas.Main files/test_1.txt
+```
+8. Successful usage of the program <br>
+![Success Image](/assets/Screenshot_9.png)

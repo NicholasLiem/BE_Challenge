@@ -43,7 +43,7 @@ public class Person {
 
     public boolean addChild(Person child) {
         if (this.gender.equalsIgnoreCase("Male")){
-            System.out.println("CHILD_ADDITION_FAILED");
+            System.out.print("CHILD_ADDITION_FAILED");
         } else {
             this.children.add(child);
             if (spouse != null) {

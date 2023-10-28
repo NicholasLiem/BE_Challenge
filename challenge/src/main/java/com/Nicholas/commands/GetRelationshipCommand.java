@@ -38,6 +38,9 @@ public class GetRelationshipCommand implements Command {
                     case "sister-in-law":
                         relatives = familyTree.getSisterInLaws(person);
                         break;
+                    case "mother-in-law":
+                        relatives = familyTree.getMotherInLaws(person);
+                        break;
                     case "maternal-aunt":
                         relatives = familyTree.getMaternalAunts(person);
                         break;
@@ -49,6 +52,12 @@ public class GetRelationshipCommand implements Command {
                         break;
                     case "paternal-uncle":
                         relatives = familyTree.getPaternalUncles(person);
+                        break;
+                    case "paternal-grandfather":
+                        relatives = familyTree.getPaternalGrandFather(person);
+                        break;
+                    case "grand-children":
+                        relatives = familyTree.getGrandChildren(person);
                         break;
                     default:
                         System.out.print("INVALID_RELATIONSHIP_TYPE");

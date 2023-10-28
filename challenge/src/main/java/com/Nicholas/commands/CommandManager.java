@@ -41,8 +41,8 @@ public class CommandManager {
     }
 
     public FamilyTree initializeFamilyTree(){
-        Person kingArthur = new Person("King Arthur", "Male");
-        Person queenMargaret = new Person("Queen Margaret", "Female");
+        Person kingArthur = new Person("King-Arthur", "Male");
+        Person queenMargaret = new Person("Queen-Margaret", "Female");
 
         Person bill = new Person("Bill", "Male");
         Person charlie = new Person("Charlie", "Male");

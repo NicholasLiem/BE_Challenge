@@ -28,6 +28,8 @@ public class Main {
     }
 
     public static String getFilePath(Scanner scanner){
+        String currentWorkingDirectory = System.getProperty("user.dir");
+        System.out.println("Current Working Directory: " + currentWorkingDirectory);
         System.out.print("Enter the path to the text file: ");
         return scanner.nextLine();
     }

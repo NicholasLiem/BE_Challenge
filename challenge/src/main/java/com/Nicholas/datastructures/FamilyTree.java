@@ -164,6 +164,52 @@ public class FamilyTree {
         return (father != null) ? getBrothers(father) : new ArrayList<>();
     }
 
+
+    /**
+     * Get Paternal GrandFather
+     */
+    public List<Person> getPaternalGrandFather(Person person) {
+        List<Person> grandpa = new ArrayList<>();
+
+        Person father = person.getFather();
+        Person paternalGrandpa = father.getFather();
+
+        if (paternalGrandpa != null) {
+            grandpa.add(paternalGrandpa);
+        }
+        return grandpa;
+    }
+
+    /**
+     * Get GrandChildren
+     */
+    public List<Person> getGrandChildren(Person person) {
+        List<Person> grandchildren = new ArrayList<>();
+
+        List<Person> children = person.getChildren();
+        for(Person child : children) {
+            List<Person> grandchild = child.getChildren();
+            grandchildren.addAll(grandchild);
+        }
+
+        return grandchildren;
+    }
+
+    /**
+     * Get MotherInLaw
+     */
+    public List<Person> getMotherInLaws(Person person) {
+        List<Person> motherInLaws = new ArrayList<>();
+        Person spouse = person.getSpouse();
+        if (spouse != null) {
+            Person motherInLaw = spouse.getMother();
+            if (motherInLaw != null) {
+                motherInLaws.add(motherInLaw);
+            }
+        }
+        return motherInLaws;
+    }
+
     public Person searchPersonByName(String name) {
         return searchPersonRecursive(this.getPerson(), name);
     }
